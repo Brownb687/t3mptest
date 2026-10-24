@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 900px;
+  --breakpoint-xl: 1280px;
+
+  --font-heading: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-canvas: #120e0d;
+  --color-card: #1b1615;
+  --color-accent: #c4805f;
+  --color-accent-hover: #d99273;
+  --color-text-main: #f5efec;
+  --color-text-muted: #b3a7a2;
+  --color-divider: #2a2220;
+  --color-status-green: #3ecf8e;
+}
+
+:root {
+  --header-h: 96px;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --header-h: 68px;
+  }
+}
+
+html {
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #120e0d;
+  color: #f5efec;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+}
+
+.hero-headline-fluid {
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  line-height: 1.08;
+}
+
+.section-title-fluid {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.12;
+}
+
+/* Card base styling */
+.proof-card {
+  background-color: #1b1615;
+  border: 1px solid rgba(196, 128, 95, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(196, 128, 95, 0.06);
+}
+
+/* Float animation for portrait card */
+@keyframes heroFloatKeyframe {
+  0%, 100% {
+    transform: rotate(3deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-14px);
+  }
+}
+
+.hero-float-anim {
+  animation: heroFloatKeyframe 4s ease-in-out infinite;
+}
+
+/* Continuous rotation for badge */
+@keyframes spinBadgeKeyframe {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-badge-anim {
+  animation: spinBadgeKeyframe 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-float-anim {
+    animation: none !important;
+    transform: rotate(3deg) !important;
+  }
+  .spin-badge-anim {
+    animation: none !important;
+  }
+}
+
+/* Section scroll-margin to clear sticky navbar on mobile and desktop */
+section[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+/* Landscape and short screens */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --header-h: 56px;
+  }
+  .landscape-short-2col {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 1.5rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .landscape-short-left {
+    order: 1 !important;
+    grid-column: span 7 / span 7 !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+  .landscape-short-right {
+    order: 2 !important;
+    grid-column: span 5 / span 5 !important;
+  }
+  .landscape-short-portrait {
+    max-height: 75dvh !important;
+    max-width: 75dvh !important;
+    width: 65dvh !important;
+    height: 65dvh !important;
+  }
+  .landscape-short-header {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+}
